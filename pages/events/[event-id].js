@@ -1,6 +1,6 @@
-function SpecificEventPage() {
+function EventDetailPage() {
     return <div>
-        <h1>The Specific Event Page</h1>
+        <h1>The Event Detail Page</h1>
     </div>;
 }
-export default SpecificEventPage;
+export default EventDetailPage;

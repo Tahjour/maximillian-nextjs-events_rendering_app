@@ -1,6 +1,11 @@
+import { getFeaturedEvents } from "../test-data";
+import EventList from "../components/events/event-list";
+
 function HomeEventsPage() {
+    const featuredEvents = getFeaturedEvents();
+
     return <div>
-        <h1>The Starting Event Page</h1>
+        <EventList events={featuredEvents} />
     </div>;
 }
 
