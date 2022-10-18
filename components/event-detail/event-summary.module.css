@@ -13,7 +13,7 @@
   color: white;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1000px) {
   .summary h1 {
     font-size: 5rem;
   }
