@@ -9,6 +9,7 @@ function Button(props) {
     }
     return <Link href={props.link}>
         <a className={styles.btn}>{props.children}</a>
+        {/* To place styles on the embedded 'a' tag in a Link component from NextJS, use it like this */}
     </Link>;
 }
 
