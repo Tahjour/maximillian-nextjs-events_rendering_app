@@ -4,16 +4,17 @@ import EventContent from "../../components/event-detail/event-content";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventSummary from "../../components/event-detail/event-summary";
 import ErrorAlert from "../../components/ui/error-alert";
-import { getEventById } from "../../test-data";
-function EventDetailPage() {
-    const router = useRouter();
-    const eventId = router.query.eventID;
-    const event = getEventById(eventId);
+import { getEventById, getFeaturedEvents } from "../../helpers/api-utils";
+function EventDetailPage(props) {
+    // const router = useRouter();
+    // const eventId = router.query.eventID;
+    // const event = props.getEventById(eventId);
+    const event = props.eventByID;
 
     if (!event) {
-        return <ErrorAlert>
-            <p>No event found!</p>
-        </ErrorAlert>;
+        return <div className="center">
+            <p>Loading!</p>
+        </div>;
     }
     return <Fragment>
         <EventSummary title={event.title} />
@@ -22,5 +23,31 @@ function EventDetailPage() {
             <p>{event.description}</p>
         </EventContent>
     </Fragment>;
+}
+
+export async function getStaticProps(context) {
+    const eventID = context.params.eventID;
+    const eventByID = await getEventById(eventID);
+    return {
+        props: {
+            eventByID: eventByID
+        },
+        revalidate: 30
+    };
+}
+
+export async function getStaticPaths() {
+    const allEvents = await getFeaturedEvents();
+    const pathParams = allEvents.map(event => {
+        return {
+            params: {
+                eventID: event.id
+            },
+        };
+    });
+    return {
+        paths: pathParams,
+        fallback: 'blocking'
+    };
 }
 export default EventDetailPage;
