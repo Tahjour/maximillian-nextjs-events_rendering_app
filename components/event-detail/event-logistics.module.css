@@ -15,16 +15,12 @@
 }
 
 .image {
-	width: 10rem;
-	height: 10rem;
 	border-radius: 50%;
 	overflow: hidden;
 	border: 5px solid white;
 }
 
 .image img {
-	width: 10rem;
-	height: 10rem;
 	object-fit: cover;
 }
 

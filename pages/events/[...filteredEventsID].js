@@ -7,6 +7,7 @@ import ErrorAlert from "../../components/ui/error-alert";
 import { redirect } from "next/dist/server/api-utils";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import Head from "next/head";
 
 function FilteredEventsPage(props) {
     //Client side data-fetching
@@ -29,14 +30,27 @@ function FilteredEventsPage(props) {
         }
     }, [data]);
 
+    let pageHeadData = <Head>
+        <title>Filtered Events</title>
+        <meta name="description" content={`A list of filtered events.`} />
+    </Head>;
+
     if (!loadedEvents || loadedEvents.length < 1) {
-        return <p className="center">Loading</p>;
+        return <Fragment>
+            {pageHeadData}
+            <p className="center">Loading</p>;
+        </Fragment>;
     }
 
     const filterYear = filteredEventsData[0];
     const filterMonth = filteredEventsData[1];
     const numYear = +filterYear;
     const numMonth = +filterMonth;
+
+    pageHeadData = <Head>
+        <title>Filtered Events</title>
+        <meta name="description" content={`Events for ${numMonth}/${numYear}`} />
+    </Head>;
 
     const filteredEvents = loadedEvents.filter((event) => {
         const eventDate = new Date(event.date);
@@ -45,6 +59,7 @@ function FilteredEventsPage(props) {
 
     if (isNaN(numYear) || isNaN(numMonth) || numYear > 2030 || numYear < 2021 || numMonth < 1 || numMonth > 12) {
         return <Fragment>
+            {pageHeadData}
             <ErrorAlert>
                 <p>Invalid Filter. Please check values!</p>
             </ErrorAlert>
@@ -56,6 +71,7 @@ function FilteredEventsPage(props) {
 
     if (!filteredEvents || filteredEvents.length < 1) {
         return <Fragment>
+            {pageHeadData}
             <ErrorAlert>
                 <p>No Events Found!</p>
             </ErrorAlert>
@@ -66,6 +82,7 @@ function FilteredEventsPage(props) {
     }
     const date = new Date(numYear, numMonth - 1);
     return <Fragment>
+        {pageHeadData}
         <ResultsTitle date={date} />
         <EventList events={filteredEvents} />
     </Fragment>;

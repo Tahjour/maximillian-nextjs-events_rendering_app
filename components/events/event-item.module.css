@@ -8,14 +8,8 @@
 	flex-direction: column;
 	gap: 1rem;
 }
-
-.item picture {
-	display: flex;
-	width: 40%;
-}
-.item picture img {
+.item img {
 	object-fit: cover;
-	width: 100%;
 }
 
 .content {
