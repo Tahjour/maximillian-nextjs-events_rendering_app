@@ -6,6 +6,7 @@ import EventLogistics from "../../components/event-detail/event-logistics";
 import EventSummary from "../../components/event-detail/event-summary";
 import ErrorAlert from "../../components/ui/error-alert";
 import { getEventById, getFeaturedEvents } from "../../helpers/api-utils";
+import Comments from "../../components/input/comments";
 function EventDetailPage(props) {
     // const router = useRouter();
     // const eventId = router.query.eventID;
@@ -27,12 +28,13 @@ function EventDetailPage(props) {
         <EventContent>
             <p>{event.description}</p>
         </EventContent>
+        <Comments eventId={event.id} />
     </Fragment>;
 }
 
 export async function getStaticProps(context) {
-    const eventID = context.params.eventID;
-    const eventByID = await getEventById(eventID);
+    const eventId = context.params.eventId;
+    const eventByID = await getEventById(eventId);
     return {
         props: {
             eventByID: eventByID
@@ -46,7 +48,7 @@ export async function getStaticPaths() {
     const pathParams = allEvents.map(event => {
         return {
             params: {
-                eventID: event.id
+                eventId: event.id
             },
         };
     });

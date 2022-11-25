@@ -14,7 +14,7 @@ function FilteredEventsPage(props) {
     const databaseURL = "https://react-routing-demo-default-rtdb.firebaseio.com/events.json";
     const [loadedEvents, setLoadedEvents] = useState([]);
     const router = useRouter();
-    const filteredEventsData = router.query.filteredEventsID;
+    const filteredEventsData = router.query.filteredEventsId;
     const fetcher = (databaseURL) => fetch(databaseURL).then(res => res.json());
     const { data, error } = useSWR(databaseURL, fetcher);
     useEffect(() => {
@@ -91,8 +91,8 @@ function FilteredEventsPage(props) {
 // export async function getServerSideProps(context) {
 //     const { params } = context;
 
-//     const filterYear = params.filteredEventsID[0];
-//     const filterMonth = params.filteredEventsID[1];
+//     const filterYear = params.filteredEventsId[0];
+//     const filterMonth = params.filteredEventsId[1];
 //     const numYear = parseInt(filterYear, 10);
 //     const numMonth = parseInt(filterMonth, 10);
 //     if (isNaN(numYear) || isNaN(numMonth) || numYear > 2030 || numYear < 2021 || numMonth < 1 || numMonth > 12) {
