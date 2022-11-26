@@ -1,6 +1,4 @@
-import { MongoClient } from "mongodb";
 import { createClient, insertDocument } from "../../../helpers/db-utils";
-
 
 
 async function handler(req, res) {
