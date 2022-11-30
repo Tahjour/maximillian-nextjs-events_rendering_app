@@ -1,3 +1,8 @@
+This is taken from [Maximillian's NextJS course on Udemy](https://www.udemy.com/course/nextjs-react-the-complete-guide/)
+It's a NextJS web app that showcases the different rendering methods that NextJS offers.
+The app itself is a demo of a website that shows available events that retrieve their data from Firebase and stores emails for newsletters, along with comments made by users, into mongoDB.
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
